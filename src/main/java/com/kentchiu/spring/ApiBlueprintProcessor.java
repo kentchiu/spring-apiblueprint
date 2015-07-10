@@ -30,6 +30,7 @@ public class ApiBlueprintProcessor {
 
     private void substitution(Path snippetHome, Path input, Path output) throws IOException {
         Map<String, String> map = loadSnippetHomeToMap(snippetHome);
+        map.putAll(loadDocHomeToMap(input.getParent()));
         List<String> lines2 = substitution(input, map);
         String join = Joiner.on('\n').join(lines2);
         logger.info("process file: {}", output);
@@ -68,6 +69,17 @@ public class ApiBlueprintProcessor {
         Collection<File> files = FileUtils.listFiles(snippetHome.toFile(), new String[]{"md"}, true);
         for (File file : files) {
             Path relativize = snippetHome.relativize(file.toPath());
+            results.put(relativize.toString(), FileUtils.readFileToString(file));
+        }
+        return results;
+    }
+
+    Map<String, String> loadDocHomeToMap(Path docHome) throws IOException {
+        Preconditions.checkArgument(Files.isDirectory(docHome), "doc home is not a directory : " + docHome.toString());
+        Map<String, String> results = Maps.newLinkedHashMap();
+        Collection<File> files = FileUtils.listFiles(docHome.toFile(), new String[]{"md"}, true);
+        for (File file : files) {
+            Path relativize = docHome.relativize(file.toPath());
             results.put(relativize.toString(), FileUtils.readFileToString(file));
         }
         return results;
