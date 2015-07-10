@@ -98,7 +98,7 @@ public class IntegrationTest {
 
         @RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
         public Map<String, Object> foo() {
-            return ImmutableMap.of("foo", "bar");
+            return ImmutableMap.of("foo", "中文繁體及中文简体");
         }
     }
 

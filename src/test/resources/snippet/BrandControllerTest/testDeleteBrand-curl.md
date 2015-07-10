@@ -1,1 +1,0 @@
-curl 'http://localhost:8080/brands/001' -X DELETE -H "Content-Type: application/json"
