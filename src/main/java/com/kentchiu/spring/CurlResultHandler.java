@@ -23,16 +23,11 @@ public class CurlResultHandler implements ResultHandler {
 
     private Logger logger = LoggerFactory.getLogger(CurlResultHandler.class);
     private Path document;
-    private int port;
-
-    public CurlResultHandler(Path document, int port) {
-        this.document = document;
-        this.port = port;
-    }
 
     public CurlResultHandler(Path document) {
-        this(document, 8080);
+        this.document = document;
     }
+
 
     private static String toQueryString(Map<String, String[]> map) {
         StringBuilder sb = new StringBuilder();
@@ -66,7 +61,7 @@ public class CurlResultHandler implements ResultHandler {
                 request.getServerName()));
 
 
-        sb.append(String.format(":%d", port));
+        sb.append(String.format(":%d", request.getServerPort()));
 
         sb.append(getRequestUriWithQueryString(request));
 
