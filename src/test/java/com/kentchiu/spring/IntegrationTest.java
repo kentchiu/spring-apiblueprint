@@ -1,6 +1,7 @@
 package com.kentchiu.spring;
 
 import com.google.common.collect.ImmutableMap;
+import com.kentchiu.spring.config.RestDocumentationConfigurer;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -61,8 +62,11 @@ public class IntegrationTest {
 
     @Test
     public void testName() throws Exception {
+        RestDocumentationConfigurer configurer = new RestDocumentationConfigurer();
+        configurer.uris().withHost("8.8.8.8").withPort(7777);
+
         MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
-                .apply(new DocumentConfigurer())
+                .apply(configurer)
                 .alwaysDo(new ApiBlueprintResultHandler(getApiBlueprintDocument()))
                 .alwaysDo(new CurlResultHandler(getDocumentHome().resolve(testName.getMethodName() + "-curl" + ".md")))
                 .alwaysDo(new AttributeResultHandler(getDocumentHome()))
