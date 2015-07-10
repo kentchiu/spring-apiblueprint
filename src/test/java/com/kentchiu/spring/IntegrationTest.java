@@ -71,11 +71,11 @@ public class IntegrationTest {
                 .alwaysDo(new CurlResultHandler(getDocumentHome().resolve(testName.getMethodName() + "-curl" + ".md")))
                 .alwaysDo(new AttributeResultHandler(getDocumentHome()))
                 .alwaysDo(print())
-                .alwaysDo(print())
                 .build();
 
 
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/").contentType(MediaType.APPLICATION_JSON);
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/")
+                .contentType(MediaType.APPLICATION_JSON);
         mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk());
 

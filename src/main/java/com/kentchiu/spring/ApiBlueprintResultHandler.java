@@ -64,6 +64,7 @@ public class ApiBlueprintResultHandler implements ResultHandler {
     private String getResponse(MvcResult result) throws UnsupportedEncodingException {
         StringBuilder sb = new StringBuilder();
         MockHttpServletResponse response = result.getResponse();
+        response.setCharacterEncoding("UTF-8");
         String content = response.getContentAsString();
         sb.append("+ Response ").append(response.getStatus());
         if (HttpStatus.NO_CONTENT.value() != response.getStatus()) {
