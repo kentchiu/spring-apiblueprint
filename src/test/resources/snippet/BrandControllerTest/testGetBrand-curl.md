@@ -1,0 +1,1 @@
+curl 'http://localhost:8080/brands/001' -H "Content-Type: application/json"
