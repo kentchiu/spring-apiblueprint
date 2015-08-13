@@ -6,3 +6,4 @@
 - DONE ~~`CatalogueTemplateControllerTest/testDeleteCatalogueTemplate_catalogue_only-curl.md` 裡面的catalogue_only沒有在curl裡~~ can't reproduce
 - TODO 已render的文件要可以被其他文件include
 - TODO GET method的url parameters
+- TODO PUT url 參數沒出現在 curl之中 ex: param("foo","bar"), `curl /resources/uuid?foo=bar` 中要出現`foo=bar`，但是沒有出現

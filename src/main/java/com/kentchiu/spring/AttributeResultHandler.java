@@ -50,7 +50,7 @@ public class AttributeResultHandler implements ResultHandler {
         }
     }
 
-    void writeToFile(Class<?> responseClass) throws IOException {
+    public void writeToFile(Class<?> responseClass) throws IOException {
         List<String> strings = attributeTable(responseClass);
         Path responseDocument = documentHome.resolve(responseClass.getSimpleName() + ".md");
         if (!strings.isEmpty()) {
