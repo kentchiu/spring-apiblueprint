@@ -18,6 +18,7 @@ import org.springframework.web.method.HandlerMethod;
 
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.beans.PropertyDescriptor;
 import java.io.IOException;
@@ -105,11 +106,11 @@ public class AttributeResultHandler implements ResultHandler {
         JoinColumn joinColumn = pd.getReadMethod().getAnnotation(JoinColumn.class);
 
         if (column != null ) {
-            attribute.setColumn(column.name());
+            attribute.setColumn(responseClass.getAnnotation(Table.class).name() + "." + column.name());
         }
 
         if (joinColumn != null )  {
-            attribute.setColumn(joinColumn.name());
+            attribute.setColumn( responseClass.getAnnotation(Table.class).name()  + "." +joinColumn.name());
         }
 
         try {
