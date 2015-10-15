@@ -60,6 +60,9 @@ public class AttributeResultHandler implements ResultHandler {
     }
 
     public void writeToFile(Class<?> responseClass) throws IOException {
+        if (responseClass.getAnnotation(Table.class) == null ||  responseClass.getAnnotation(Table.class).name() == null) {
+            showColumn = false;
+        }
         List<String> strings = attributeTable(responseClass);
         Path responseDocument = documentHome.resolve(responseClass.getSimpleName() + ".md");
         if (!strings.isEmpty()) {
@@ -105,12 +108,14 @@ public class AttributeResultHandler implements ResultHandler {
         Column column = pd.getReadMethod().getAnnotation(Column.class);
         JoinColumn joinColumn = pd.getReadMethod().getAnnotation(JoinColumn.class);
 
-        if (column != null ) {
-            attribute.setColumn(responseClass.getAnnotation(Table.class).name() + "." + column.name());
-        }
+        if (responseClass.getAnnotation(Table.class) != null && responseClass.getAnnotation(Table.class).name() != null) {
+            if (column != null  ) {
+                attribute.setColumn(responseClass.getAnnotation(Table.class).name() + "." + column.name());
+            }
 
-        if (joinColumn != null )  {
-            attribute.setColumn( responseClass.getAnnotation(Table.class).name()  + "." +joinColumn.name());
+            if (joinColumn != null )  {
+                attribute.setColumn( responseClass.getAnnotation(Table.class).name()  + "." +joinColumn.name());
+            }
         }
 
         try {
