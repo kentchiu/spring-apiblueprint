@@ -16,6 +16,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultHandler;
 import org.springframework.web.method.HandlerMethod;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
 import java.beans.PropertyDescriptor;
 import java.io.IOException;
@@ -30,10 +32,16 @@ import java.util.stream.Collectors;
 public class AttributeResultHandler implements ResultHandler {
 
     private Path documentHome;
+    private boolean showColumn;
     private Logger logger = LoggerFactory.getLogger(AttributeResultHandler.class);
 
     public AttributeResultHandler(Path documentHome) {
         this.documentHome = documentHome;
+    }
+
+    public AttributeResultHandler(Path documentHome, boolean showColumn) {
+        this.documentHome = documentHome;
+        this.showColumn = showColumn;
     }
 
     @Override
@@ -93,6 +101,17 @@ public class AttributeResultHandler implements ResultHandler {
         attribute.setPath(propertyName);
         attribute.setType(type.name());
 
+        Column column = pd.getReadMethod().getAnnotation(Column.class);
+        JoinColumn joinColumn = pd.getReadMethod().getAnnotation(JoinColumn.class);
+
+        if (column != null ) {
+            attribute.setColumn(column.name());
+        }
+
+        if (joinColumn != null )  {
+            attribute.setColumn(joinColumn.name());
+        }
+
         try {
             boolean required = isRequired(responseClass, pd, propertyName);
             attribute.setRequired(required);
@@ -119,10 +138,15 @@ public class AttributeResultHandler implements ResultHandler {
         return attribute;
     }
 
-    private List<String> toTable(List<Attribute> collect) {
+    protected List<String> toTable(List<Attribute> collect) {
         List<String> results = Lists.newArrayList();
-        results.add(" Field | Required | Type | default | Format | Description ");
-        results.add("-------|----------|------|---------|--------|-------------");
+        if (showColumn) {
+            results.add(" Field | Required | Type | default | Format | Column | Description ");
+            results.add("-------|----------|------|---------|--------|--------|-------------");
+        } else {
+            results.add(" Field | Required | Type | default | Format | Description ");
+            results.add("-------|----------|------|---------|--------|-------------");
+        }
         collect.forEach(a -> {
             StringBuffer sb = new StringBuffer();
             sb.append(a.getPath()).append("|");
@@ -130,6 +154,9 @@ public class AttributeResultHandler implements ResultHandler {
             sb.append(a.getType().toLowerCase()).append("|");
             sb.append(a.getDefaultValue()).append("|");
             sb.append(a.getFormat()).append("|");
+            if (showColumn) {
+                sb.append(a.getColumn()).append("|");
+            }
             sb.append(a.getDescription());
             results.add(sb.toString());
         });

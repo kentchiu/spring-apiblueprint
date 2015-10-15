@@ -11,6 +11,15 @@ public class Attribute {
     private String format = "";
     private String defaultValue = "";
     private boolean ignore;
+    private String column = "";
+
+    public String getColumn() {
+        return column;
+    }
+
+    public void setColumn(String column) {
+        this.column = column;
+    }
 
     public boolean isIgnore() {
         return ignore;

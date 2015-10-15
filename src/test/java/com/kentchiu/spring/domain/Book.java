@@ -3,7 +3,9 @@ package com.kentchiu.spring.domain;
 import com.kentchiu.spring.attribute.AttributeInfo;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -18,6 +20,7 @@ public class Book extends MaintainObject {
     private String name;
 
 
+    @JoinColumn(name = "AUTHOR_UUID")
     @AttributeInfo(description = "作者")
     public List<Author> getAuthors() {
         return authors;
@@ -47,6 +50,7 @@ public class Book extends MaintainObject {
     }
 
     @NotBlank
+    @Column(name = "BOOK_NAME")
     @AttributeInfo(path = "bookName")
     public String getName() {
         return name;

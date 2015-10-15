@@ -34,7 +34,7 @@ class TablePrettyFormat {
             for (String cell : strings) {
                 boolean isDivider = StringUtils.startsWith(cell, "--");
                 if (isDivider) {
-                    // divider (a.k.a ---------|------|--------)
+                    // divider ( ---------|------|--------)
                     sb.append(StringUtils.rightPad(cell, cellLengths.get(i++), "-"));
                     if (i < cellLengths.size()) {
                         sb.append("|");
