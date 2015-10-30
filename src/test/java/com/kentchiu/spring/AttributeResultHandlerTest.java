@@ -30,7 +30,7 @@ public class AttributeResultHandlerTest {
         assertThat(lines.get(8), is(" modiUser   |          | string    |         |                     |                             |             "));
         assertThat(lines.get(9), is(" bookName   | *        | string    |         |                     | test_book_tbl.BOOK_NAME     |             "));
         assertThat(lines.get(10), is(" price      | *        | number    |         |                     |                             |             "));
-        assertThat(lines.get(11), is(" publisher  |          | publish    |         |                     | test_book_tbl.PUBLISH__UUID | 出版商         "));
+        assertThat(lines.get(11), is(" publisher  |          | publisher |         |                     | test_book_tbl.PUBLISH__UUID | 出版商         "));
         assertThat(lines.get(12), is(" status     |          | character |         |                     |                             |             "));
         assertThat(lines.get(13), is(" uuid       |          | string    |         |                     |                             |             "));
 
