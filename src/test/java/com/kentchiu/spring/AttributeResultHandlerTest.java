@@ -19,19 +19,20 @@ public class AttributeResultHandlerTest {
 
         lines.stream().forEach(System.out::println);
 
-        assertThat(lines.get(0), is(" Field      | Required | Type      | default | Format              | Column                    | Description "));
-        assertThat(lines.get(1), is("------------|----------|-----------|---------|---------------------|---------------------------|-------------"));
-        assertThat(lines.get(2), is(" isbn       |          | string    |         |                     |                           | ISBN編號      "));
-        assertThat(lines.get(3), is(" authors    |          | array     |         |                     | test_book_tbl.AUTHOR_UUID | 作者          "));
-        assertThat(lines.get(4), is(" confirm    |          | character |         |                     |                           |             "));
-        assertThat(lines.get(5), is(" createDate |          | date      | now     | yyyy/MM/dd HH:mm:ss |                           | 资料创建日期      "));
-        assertThat(lines.get(6), is(" createUser |          | string    |         |                     |                           | 资料创建者       "));
-        assertThat(lines.get(7), is(" modiDate   |          | date      |         |                     |                           |             "));
-        assertThat(lines.get(8), is(" modiUser   |          | string    |         |                     |                           |             "));
-        assertThat(lines.get(9), is(" bookName   | *        | string    |         |                     | test_book_tbl.BOOK_NAME   |             "));
-        assertThat(lines.get(10), is(" price      | *        | number    |         |                     |                           |             "));
-        assertThat(lines.get(11), is(" status     |          | character |         |                     |                           |             "));
-        assertThat(lines.get(12), is(" uuid       |          | string    |         |                     |                           |             "));
+        assertThat(lines.get(0), is(" Field      | Required | Type      | default | Format              | Column                      | Description "));
+        assertThat(lines.get(1), is("------------|----------|-----------|---------|---------------------|-----------------------------|-------------"));
+        assertThat(lines.get(2), is(" isbn       |          | string    |         |                     |                             | ISBN編號      "));
+        assertThat(lines.get(3), is(" authors    |          | array     |         |                     | test_book_tbl.AUTHOR_UUID   | 作者          "));
+        assertThat(lines.get(4), is(" confirm    |          | character |         |                     |                             |             "));
+        assertThat(lines.get(5), is(" createDate |          | date      | now     | yyyy/MM/dd HH:mm:ss |                             | 资料创建日期      "));
+        assertThat(lines.get(6), is(" createUser |          | string    |         |                     |                             | 资料创建者       "));
+        assertThat(lines.get(7), is(" modiDate   |          | date      |         |                     |                             |             "));
+        assertThat(lines.get(8), is(" modiUser   |          | string    |         |                     |                             |             "));
+        assertThat(lines.get(9), is(" bookName   | *        | string    |         |                     | test_book_tbl.BOOK_NAME     |             "));
+        assertThat(lines.get(10), is(" price      | *        | number    |         |                     |                             |             "));
+        assertThat(lines.get(11), is(" publisher  |          | object    |         |                     | test_book_tbl.PUBLISH__UUID | 出版商         "));
+        assertThat(lines.get(12), is(" status     |          | character |         |                     |                             |             "));
+        assertThat(lines.get(13), is(" uuid       |          | string    |         |                     |                             |             "));
 
     }
 
@@ -52,8 +53,9 @@ public class AttributeResultHandlerTest {
         assertThat(lines.get(8), is(" modiUser   |          | string    |         |                     |             "));
         assertThat(lines.get(9), is(" bookName   | *        | string    |         |                     |             "));
         assertThat(lines.get(10), is(" price      | *        | number    |         |                     |             "));
-        assertThat(lines.get(11), is(" status     |          | character |         |                     |             "));
-        assertThat(lines.get(12), is(" uuid       |          | string    |         |                     |             "));
+        assertThat(lines.get(11), is(" publisher  |          | object    |         |                     | 出版商         "));
+        assertThat(lines.get(12), is(" status     |          | character |         |                     |             "));
+        assertThat(lines.get(13), is(" uuid       |          | string    |         |                     |             "));
     }
 
 

@@ -18,6 +18,7 @@ public class Book extends MaintainObject {
     private String ISBN;
     private Double price;
     private String name;
+    private Publisher publisher;
 
 
     @JoinColumn(name = "AUTHOR_UUID")
@@ -60,5 +61,14 @@ public class Book extends MaintainObject {
         this.name = name;
     }
 
+    @JoinColumn(name = "PUBLISH__UUID")
+    @AttributeInfo(path = "publisher", description = "出版商")
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
 
 }
