@@ -15,7 +15,7 @@ public @interface AttributeInfo {
 
     String path() default "";
 
-    Type type() default Type.UNKOWN;
+    Type type() default Type.UNKNOWN;
 
     boolean required() default false;
 
@@ -28,7 +28,7 @@ public @interface AttributeInfo {
     String defaultValue() default "";
 
     enum Type {
-        UNKOWN, ARRAY, CHARACTER, NUMBER, STRING, BOOLEAN, OBJECT, DATE, ENUM;
+        UNKNOWN, ARRAY, CHARACTER, NUMBER, STRING, BOOLEAN, OBJECT, DATE, ENUM;
 
 
         public static AttributeInfo.Type valueOf(Class<?> type) {

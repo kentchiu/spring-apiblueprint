@@ -103,7 +103,11 @@ public class AttributeResultHandler implements ResultHandler {
         AttributeInfo.Type type = AttributeInfo.Type.valueOf(pd.getPropertyType());
         Attribute attribute = new Attribute();
         attribute.setPath(propertyName);
-        attribute.setType(type.name());
+        if (AttributeInfo.Type.UNKNOWN == type || AttributeInfo.Type.OBJECT == type) {
+            attribute.setType(pd.getPropertyType().getSimpleName());
+        } else {
+            attribute.setType(type.name());
+        }
 
         Column column = pd.getReadMethod().getAnnotation(Column.class);
         JoinColumn joinColumn = pd.getReadMethod().getAnnotation(JoinColumn.class);
@@ -137,7 +141,7 @@ public class AttributeResultHandler implements ResultHandler {
             if (StringUtils.isNotBlank(info.path())) {
                 attribute.setPath(info.path());
             }
-            if (AttributeInfo.Type.UNKOWN != info.type()) {
+            if (AttributeInfo.Type.UNKNOWN != info.type()) {
                 attribute.setPath(info.type().name());
             }
         }
