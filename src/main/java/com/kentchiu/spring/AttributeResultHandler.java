@@ -59,7 +59,7 @@ public class AttributeResultHandler implements ResultHandler {
         }
     }
 
-    public void writeToFile(Class<?> responseClass) throws IOException {
+    public Path writeToFile(Class<?> responseClass) throws IOException {
         if (responseClass.getAnnotation(Table.class) == null ||  responseClass.getAnnotation(Table.class).name() == null) {
             showColumn = false;
         }
@@ -70,6 +70,7 @@ public class AttributeResultHandler implements ResultHandler {
             Files.write(responseDocument, join.getBytes());
         }
         logger.info("snippet file: {}", responseDocument);
+        return responseDocument;
     }
 
     public List<String> attributeTable(Class<?> responseClass) {
